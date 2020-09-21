@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Slider from "./Slider";
 import "./App.css";
 import SidebarItem from "./SidebarItem";
+import ImagePicker from "./ImagePicker";
+import SaveFile from "./SaveFile";
 
 const DEFAULT_OPTIONS = [
   {
@@ -79,6 +81,9 @@ const DEFAULT_OPTIONS = [
 const App = () => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
+  const [image, setImage] = useState(
+    "https://cdn.pixabay.com/photo/2017/10/28/18/17/trees-2897757_960_720.jpg"
+  );
   const selectedOption = options[selectedOptionIndex];
 
   const handleSliderChange = ({ target }) => {
@@ -99,30 +104,42 @@ const App = () => {
     return { filter: filters.join(" ") };
   };
 
-  console.log(getImageStyle());
-
   return (
     <div className="container">
-      <div className="main-image" style={getImageStyle()} />
-      <div className="sidebar">
-        {options?.map((option, index) => {
-          return (
-            <SidebarItem
-              key={index}
-              name={option.name}
-              active={index === selectedOptionIndex}
-              handleClick={() => setSelectedOptionIndex(index)}
-            />
-          );
-        })}
+      {/* <div className="main-image" style={getImageStyle()} /> */}
+      <div className="container__row">
+        <div className="container__image">
+          <img
+            src={image}
+            className="container__imageMain"
+            style={getImageStyle()}
+          />
+        </div>
+        <div className="sidebar">
+          {options?.map((option, index) => {
+            return (
+              <SidebarItem
+                key={index}
+                name={option.name}
+                active={index === selectedOptionIndex}
+                handleClick={() => setSelectedOptionIndex(index)}
+              />
+            );
+          })}
+        </div>
       </div>
-
-      <Slider
-        min={selectedOption.range.min}
-        max={selectedOption.range.max}
-        value={selectedOption.value}
-        handleChange={handleSliderChange}
-      />
+      <div className="container__row">
+        <Slider
+          min={selectedOption.range.min}
+          max={selectedOption.range.max}
+          value={selectedOption.value}
+          handleChange={handleSliderChange}
+        />
+      </div>
+      <div className="container__row">
+        <ImagePicker setImage={setImage} />
+        {/* <SaveFile image={image} /> */}
+      </div>
     </div>
   );
 };

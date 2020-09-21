@@ -1,85 +1,156 @@
 *,
-*::before,
-*::after {
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
+.container__row {
+  display: flex;
+  max-width: 800px;
+  margin: 10px auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1fr auto;
-  grid-template-areas:
-    'image sidebar'
-    'slider sidebar';
-  height: 100vh;
-  width: 100vw;
-  background-color: #dadada;
-}
-
-.main-image {
-  margin-top: 15px;
-  grid-area: image;
-  background-image: url('https://cdn.pixabay.com/photo/2017/10/28/18/17/trees-2897757_960_720.jpg');
-  width: 100%;
-  height: 100%;
-  background-position: top center;
-  background-size: contain;
-  background-repeat: no-repeat;
+.container__imageMain {
+  max-height: 461px;
 }
 
 .sidebar {
-  grid-area: sidebar;
-  background-color: hsl(265, 100%, 86%);
-  border-left: 1px solid hsl(265, 100%, 56%);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
-.sidebar-item {
-  cursor: pointer;
-  border: none;
+.sidebar__item {
+  padding: 24px;
   outline: none;
-  background-color: hsl(265, 100%, 86%);
-  padding: 1rem;
-  position: relative;
-  transition: background-color 150ms;
+  border: none;
+  border-bottom: 1px solid gray;
+  background-color: #0a4f70;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-.sidebar-item:hover,
-.sidebar-item:focus {
-  background-color: hsl(265, 100%, 76%);
+.sidebar__item:hover,
+.sidebar__item:focus {
+  background-color: #f7f6f6;
+  color: #0a4f70;
 }
 
-.sidebar-item.active {
-  background-color: hsl(265, 100%, 70%);
+.sidebar__item.active {
+  background-color: #f7f6f6;
+  color: #0a4f70;
 }
 
-.sidebar-item::after {
-  content: '';
-  position: absolute;
-  width: 80%;
-  left: 10%;
-  bottom: 0;
-  height: 1px;
-  background-color: hsl(265, 100%, 46%);
+.sidebar__item:last-child {
+  border-bottom: none;
 }
 
-.sidebar-item:last-child::after {
+.slider__container {
+  background-color: #0a4f70;
+  padding: 12px 20px;
+}
+
+.image__pickerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image__pickerLabel {
+  margin: 10px auto;
+  padding: 12px;
+  background-color: #0a4f70;
+  color: #f7f7f7;
+  cursor: pointer;
+}
+
+.image__pickerLabel:hover {
+  background-color: #f7f6f6;
+  color: #0a4f70;
+}
+
+.image__pickerInput {
   display: none;
 }
 
-.slider-container {
-  grid-area: slider;
-  margin-top: 2rem;
-  padding: 2rem;
+.save__container {
+  display: flex;
+  align-items: center;
 }
 
-.slider {
-  width: 100%;
+.save__button {
+  border: 0;
+  padding: 13px;
+  margin-right: 2px;
+  background-color: #0a4f70;
+  color: #f7f6f6;
   cursor: pointer;
+}
+
+.save__button:hover {
+  background-color: #f7f6f6;
+  color: #0a4f70;
+}
+
+@media (max-width: 360px) {
+  .container__row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .container__imageMain {
+    width: 300px;
+  }
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar__item {
+    flex: 1;
+    border: 1px solid gray;
+  }
+}
+
+@media (max-width: 540px) {
+  .container__row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .container__imageMain {
+    width: 400px;
+  }
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar__item {
+    flex: 1;
+    border: 1px solid gray;
+  }
+}
+
+@media (max-width: 720px) {
+  .container__row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .container__imageMain {
+    width: 540px;
+    object-fit: contain;
+  }
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar__item {
+    flex: 1;
+    border: 1px solid gray;
+  }
 }
